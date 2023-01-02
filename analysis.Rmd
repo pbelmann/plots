@@ -1,5 +1,10 @@
 Wastewater Example Datasets
 
+```{r lib}
+library(data.table)
+```
+
+
 Let's investigate the quality of all MAGs
 
 ```{r readInRemoteFiles}
