@@ -1,0 +1,24 @@
+Wastewater Example Datasets
+
+Let's investigate the quality of all MAGs
+
+```{r readInRemoteFiles}
+all_files = c(
+"https://openstack.cebitec.uni-bielefeld.de:8080/wastewater-test2/ERR2592245/1/magAttributes/1.0.1/checkm/ERR2592245_checkm_G5cnwW9c.tsv",
+"https://openstack.cebitec.uni-bielefeld.de:8080/wastewater-test2/ERR2592249/1/magAttributes/1.0.1/checkm/ERR2592249_checkm_lGLjemNy.tsv",
+"https://openstack.cebitec.uni-bielefeld.de:8080/wastewater-test2/ERR2592251/1/magAttributes/1.0.1/checkm/ERR2592251_checkm_NReHTBxy.tsv",
+"https://openstack.cebitec.uni-bielefeld.de:8080/wastewater-test2/ERR2592252/1/magAttributes/1.0.1/checkm/ERR2592252_checkm_ALtKuhvK.tsv",
+"https://openstack.cebitec.uni-bielefeld.de:8080/wastewater-test2/ERR2592253/1/magAttributes/1.0.1/checkm/ERR2592253_checkm_8jPgQr9a.tsv")
+
+
+
+# empty list to store each file as a data.frame when read-in
+file_list <- vector(mode="list", length=length(all_files))
+
+# loop over files, reading in one at a time
+for(i in 1:length(all_files)) {
+    file_list[[i]] <- read.csv(all_files[i], sep = '\t')
+}
+
+# stack all of the files using rbindlist() from package data.table
+big_df <- rbindlist(file_list)
